@@ -45,6 +45,7 @@ namespace Homework3
 
         public rectangle(float a,float b)
         {
+            if (a <= 0 | b <= 0) throw new Exception("illegal param"); 
             width = a;
             height = b;
         }
@@ -95,10 +96,11 @@ namespace Homework3
            
             try
             {
-                if (A + B <= C | A + C <= B | B + C <= A) throw new Exception();
-            }catch(Exception e) { 
-               
-                Console.WriteLine("illegal triangle");
+                if (A + B <= C | A + C <= B | B + C <= A) throw new Exception("illegal triangle input");
+                if (A <= 0 | B <= 0|C<=0) throw new Exception("illegal param");
+            }
+            catch(Exception e) {
+                Console.WriteLine(e.Message);
             }
             this.A = A;
             this.B = B;
@@ -133,16 +135,23 @@ namespace Homework3
         }
     }
 
+    //工厂类
     class ShapeFactory : Shape
     {
         Shape shapeN;
 
         public ShapeFactory(Shape shape)
         {
-            if (shape is rectangle) shapeN=new rectangle(((rectangle)shape).Height, ((rectangle)shape).Width);
-            if (shape is Square) shapeN = new Square(((Square)shape).edge);
-            if (shape is Triangle) shapeN = new Triangle(((Triangle)shape).Va, ((Triangle)shape).Vb, ((Triangle)shape).Vc);
-
+            try
+            {
+                if (shape is rectangle) shapeN = new rectangle(((rectangle)shape).Height, ((rectangle)shape).Width);
+                else if (shape is Square) shapeN = new Square(((Square)shape).edge);
+                else if (shape is Triangle) shapeN = new Triangle(((Triangle)shape).Va, ((Triangle)shape).Vb, ((Triangle)shape).Vc);
+                else throw new Exception("illegal shape");
+            }catch(Exception e)
+            {
+             Console.WriteLine(e.Message);
+            }
         }
         float Shape.getArea()
         {
