@@ -1,0 +1,8 @@
+C:\Users\赵颖\source\repos\DotnetHomework\Homework\Homework2\bin\Debug\Homework2.exe.config
+C:\Users\赵颖\source\repos\DotnetHomework\Homework\Homework2\bin\Debug\Homework2.exe
+C:\Users\赵颖\source\repos\DotnetHomework\Homework\Homework2\bin\Debug\Homework2.pdb
+C:\Users\赵颖\source\repos\DotnetHomework\Homework\Homework2\obj\Debug\Homework2.csproj.AssemblyReference.cache
+C:\Users\赵颖\source\repos\DotnetHomework\Homework\Homework2\obj\Debug\Homework2.csproj.SuggestedBindingRedirects.cache
+C:\Users\赵颖\source\repos\DotnetHomework\Homework\Homework2\obj\Debug\Homework2.csproj.CoreCompileInputs.cache
+C:\Users\赵颖\source\repos\DotnetHomework\Homework\Homework2\obj\Debug\Homework2.exe
+C:\Users\赵颖\source\repos\DotnetHomework\Homework\Homework2\obj\Debug\Homework2.pdb

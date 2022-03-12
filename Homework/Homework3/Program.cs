@@ -26,7 +26,7 @@ namespace Homework3
             {
                 Shape s=new ShapeFactory(shape1);
                 total += s.getArea();
-
+                
             }
 
             Console.WriteLine(total);
