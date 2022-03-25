@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Homework5
 {
+    [Serializable]
     internal class Goods
     {
         private string Name;

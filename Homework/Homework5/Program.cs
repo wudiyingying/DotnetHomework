@@ -10,7 +10,7 @@ namespace Homework5
     internal class Program
     {
 
-        //这个main里面只是做了方法实现的演示，其余的输入输出文件读写1以省略
+        //这个main里面只是做了方法实现的演示，其余的输入输出文件读写以省略
         static void Main(string[] args)
         {
            
@@ -60,6 +60,9 @@ namespace Homework5
             OrderService orderService = new OrderService(orders);
 
 
+            
+
+            /*
             Console.WriteLine("The first order ");
             Console.WriteLine(orders[0]);
             Console.WriteLine("\nThe second order ");
@@ -97,6 +100,7 @@ namespace Homework5
             {
                 Console.WriteLine(order);
             }
+            */
         }
     }
 }

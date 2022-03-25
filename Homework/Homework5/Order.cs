@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Homework5
 {
+    [Serializable]
     internal class Order:IComparable
     {
         private string OrderNumber;
