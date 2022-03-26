@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework5
+namespace Homework6
 {
-    [Serializable]
-    internal class Client
+
+    public class Client
     {
 
         private string Name;
@@ -19,8 +19,10 @@ namespace Homework5
             ID = id;
         }
 
-        public string name { get => Name; }
-        public string id { get => ID; }
+        public Client() { }
+
+        public string name { get => Name; set => Name = value; }
+        public string id { get => ID; set => ID = value; }
 
         public override bool Equals(object obj)
         {

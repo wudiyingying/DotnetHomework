@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework5
+namespace Homework6
 {
-    [Serializable]
-    internal class Goods
+
+    public class Goods
     {
         private string Name;
         private string SerialNumber;
@@ -20,7 +20,13 @@ namespace Homework5
             Price = price;
         }
 
-        public float price { get => Price; }
+        public Goods() { }
+
+        public float price { get => Price; set => Price = value;}
+        public string serialNum { get => SerialNumber; set => SerialNumber = value; }
+        public string name { get => Name; set => Name = value; }
+
+
         public override bool Equals(object obj)
         {
             Goods goods=obj as Goods;

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Xml.Serialization;
 
-namespace Homework5
+namespace Homework6
 {
     internal class Program
     {
@@ -51,15 +52,24 @@ namespace Homework5
                 new OrderDetails(goods[5],0.88,1),
             };
 
+            
             List<Order> orders = new List<Order>{
                 new Order("000001", client1, details1),
                 new Order("000002", client2, details2)
 
             };
-
+            /*
+            Order[] orders = {
+                new Order("000001", client1, details1),
+                new Order("000002", client2, details2)};
+            */
             OrderService orderService = new OrderService(orders);
 
+            orderService.Export();
+            
 
+            List<Order> testOrder=OrderService.Import("..\\..\\s.xml");
+            
             
 
             /*

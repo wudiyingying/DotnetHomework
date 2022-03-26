@@ -4,24 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework5
+namespace Homework6
 {
-    [Serializable]
-    internal class Order:IComparable
+    
+    public class Order:IComparable
     {
         private string OrderNumber;
         private Client client;
         private List<OrderDetails> orderDetails;
  
+      
+        public string orderNum{ get => OrderNumber; set =>OrderNumber=value; }
 
-        public string orderNum{ get => OrderNumber; }
-        public string clientName { get => client.name; }
+        public Client clientDetail { get => client; set => client = value; }
+        
+        public List<OrderDetails> OrderDetails { get => orderDetails; set => orderDetails = value; }
+
+
+
 
         public Order(String orderNum,Client c,List<OrderDetails> d)
         {
             OrderNumber = orderNum;
             client = c;
             orderDetails = d;
+        }
+
+        public Order() { 
+        
         }
 
         public Order(Order order)

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework5
+namespace Homework6
 {
-    [Serializable]
-    internal class OrderDetails
+  
+    public class OrderDetails
     {
         private Goods goods;
         private double discount;
@@ -19,6 +19,14 @@ namespace Homework5
             discount = d;
             count = c;
         }
+
+        public OrderDetails() { }
+
+        public Goods goodsDetail { get => goods; set => goods = value; }
+
+        public double Discount { get => discount; set => discount = value; }
+
+        public int Count { get => count; set => count = value; }
         public override string ToString()
         {
             return goods.ToString()+" Discount : "+discount +" Count : "+count;

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
-namespace Homework5
+namespace Homework6
 {
-    internal class OrderService
+    public class OrderService
     {
         private List<Order> orders;
 
@@ -79,7 +81,7 @@ namespace Homework5
         {
             try
             {
-                var query = from order in orders where order.clientName == Name select new Order(order);
+                var query = from order in orders where order.clientDetail.name == Name select new Order(order);
                 
                 
                 if (query.Last()==null) throw new Exception("Select Failed");
@@ -91,6 +93,30 @@ namespace Homework5
                 return new List<Order>();
             }
             
+        }
+
+        public void Export()
+        {
+            
+            XmlSerializer xml = new XmlSerializer(typeof(Order[]));
+            using (FileStream fs = new FileStream(@"..\..\s.xml", FileMode.Create))
+            {
+                xml.Serialize(fs, orders.ToArray());
+              
+            }
+
+        }
+
+        public static List<Order> Import(string path)
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(Order[]));
+            List<Order> orders=new List<Order>();
+            using (FileStream fs = new FileStream(path, FileMode.Open))
+            {
+                fs.Seek(0, SeekOrigin.Begin);
+                orders.AddRange((Order[])xml.Deserialize(fs));
+            }
+            return orders;
         }
 
     }
