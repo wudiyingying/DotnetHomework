@@ -46,5 +46,13 @@ namespace Homework6_unitTest
             orderService.addOrder(orderService.Orders.ToArray()[0]);
             Assert.AreEqual(i+1, orderService.Orders.Count);
         }
+        
+        [TestMethod]
+        public void deleteOrderTest()
+        {
+            int i = orderService.Orders.Count;
+            orderService.deleteOrder(orderService.Orders.ToArray()[0]);
+            Assert.AreEqual(i - 1, orderService.Orders.Count);
+        }
     }
 }
