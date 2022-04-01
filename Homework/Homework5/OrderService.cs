@@ -12,6 +12,7 @@ namespace Homework6
     {
         private List<Order> orders;
 
+        public List<Order> Orders { get => orders; }
         
         public OrderService(List<Order> orders)
         {

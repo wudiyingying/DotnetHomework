@@ -8,9 +8,13 @@ namespace Homework6_unitTest
     [TestClass]
     public class UnitTest1
     {
-        
-        OrderService orderService = new OrderService(OrderService.Import("..\\..\\s.xml"));
-        
+        OrderService orderService;
+
+        [TestInitialize]
+        public void initial()
+        {
+           orderService = new OrderService(OrderService.Import("..\\..\\s.xml"));
+        }
 
         [TestMethod]
         public void queryByClientNameTest()
@@ -28,6 +32,19 @@ namespace Homework6_unitTest
             Assert.AreEqual(resultOrderNum, result.clientDetail.id);
         }
 
-        
+        [TestMethod]
+        public void importTest()
+        {
+            List<Order> temp = OrderService.Import("..\\..\\s.xml");
+            Assert.AreEqual(orderService.Orders.Count, temp.Count);
+        }
+
+        [TestMethod]
+        public void addOrderTest()
+        {
+            int i = orderService.Orders.Count;
+            orderService.addOrder(orderService.Orders.ToArray()[0]);
+            Assert.AreEqual(i+1, orderService.Orders.Count);
+        }
     }
 }
