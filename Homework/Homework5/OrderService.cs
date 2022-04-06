@@ -110,12 +110,12 @@ namespace Homework6
 
         public static List<Order> Import(string path)
         {
-            XmlSerializer xml = new XmlSerializer(typeof(Order[]));
+            XmlSerializer xml = new XmlSerializer(typeof(List<Order>));
             List<Order> orders=new List<Order>();
             using (FileStream fs = new FileStream(path, FileMode.Open))
             {
                 fs.Seek(0, SeekOrigin.Begin);
-                orders.AddRange((Order[])xml.Deserialize(fs));
+                orders.AddRange((List<Order>)xml.Deserialize(fs));
             }
             return orders;
         }
