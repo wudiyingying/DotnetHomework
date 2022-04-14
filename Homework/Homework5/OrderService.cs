@@ -29,6 +29,11 @@ namespace Homework6
             orders.Remove(order);
         }
 
+        public void deleteOrderByNum(string num) {
+            orders.RemoveAll(o=>o.orderNum==num);
+            
+        }
+
         public void changeOrder(Order oldOrder,Order newOrder)
         {
             
