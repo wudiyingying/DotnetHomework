@@ -28,17 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.strInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.strDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.URL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.strInfoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -84,27 +83,35 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.strDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.strInfoBindingSource;
+            this.Index,
+            this.URL,
+            this.status});
             this.dataGridView1.Location = new System.Drawing.Point(12, 64);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(800, 381);
             this.dataGridView1.TabIndex = 3;
             // 
-            // strInfoBindingSource
+            // Index
             // 
-            this.strInfoBindingSource.DataSource = typeof(Homework9_Form.strInfo);
+            this.Index.DataPropertyName = "Index";
+            this.Index.HeaderText = "Index";
+            this.Index.Name = "Index";
             // 
-            // strDataGridViewTextBoxColumn
+            // URL
             // 
-            this.strDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.strDataGridViewTextBoxColumn.DataPropertyName = "str";
-            this.strDataGridViewTextBoxColumn.HeaderText = "爬行结果";
-            this.strDataGridViewTextBoxColumn.Name = "strDataGridViewTextBoxColumn";
+            this.URL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.URL.DataPropertyName = "URL";
+            this.URL.HeaderText = "URL";
+            this.URL.Name = "URL";
+            // 
+            // status
+            // 
+            this.status.DataPropertyName = "Status";
+            this.status.HeaderText = "Status";
+            this.status.Name = "status";
             // 
             // Form1
             // 
@@ -118,7 +125,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.strInfoBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -130,8 +136,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn strDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource strInfoBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Index;
+        private System.Windows.Forms.DataGridViewTextBoxColumn URL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
     }
 }
 
