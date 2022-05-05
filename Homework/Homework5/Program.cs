@@ -23,39 +23,39 @@ namespace Homework6
                 new Goods("EarPhone","EA001",1000),
                 new Goods("Phone","EA005",5000),
                 new Goods("Laptop","EA010",8000),
-                new Goods("Keybord","EA119",500),
+                new Goods("Keybord","EA109",500),
                 new Goods("Displayer","EA002",2000),
                 new Goods("TabletPC","EA221",6000)
             };
 
             List<OrderDetails> details1 = new List<OrderDetails>
             {
-                new OrderDetails(goods[0],0.9,2),
-                new OrderDetails(goods[3],0.95,3),
-                new OrderDetails(goods[4],0.8,1),
-                new OrderDetails(goods[5],0.88,1),
+                new OrderDetails("000001",goods[0],0.9,2),
+                new OrderDetails("000002",goods[3],0.95,3),
+                new OrderDetails("000003",goods[4],0.8,1),
+                new OrderDetails("000004",goods[5],0.88,1),
             };
 
             List<OrderDetails> details2 = new List<OrderDetails>
             {
-                new OrderDetails(goods[2],0.8,2),
-                new OrderDetails(goods[1],0.95,3),
-                new OrderDetails(goods[5],0.8,1),
-                new OrderDetails(goods[3],0.88,1),
+                new OrderDetails("000001",goods[2],0.8,2),
+                new OrderDetails("000002",goods[1],0.95,3),
+                new OrderDetails("000003",goods[5],0.8,1),
+                new OrderDetails("000004",goods[4],0.88,1),
             };
 
             List<OrderDetails> details3 = new List<OrderDetails>
             {
-                new OrderDetails(goods[0],0.9,2),
-                new OrderDetails(goods[3],0.95,3),
-                new OrderDetails(goods[4],0.8,1),
-                new OrderDetails(goods[5],0.88,1),
+                new OrderDetails("000001",goods[0],0.9,2),
+                new OrderDetails("000002",goods[3],0.95,3),
+                new OrderDetails("000003",goods[4],0.8,1),
+                new OrderDetails("000004",goods[5],0.88,1),
             };
 
             
             List<Order> orders = new List<Order>{
-                new Order("000001", client1, details1),
-                new Order("000002", client2, details2)
+                new Order("XX0001", client1, details1),
+                new Order("XX0002", client2, details2)
 
             };
             /*
@@ -67,8 +67,13 @@ namespace Homework6
 
             orderService.Export();
             
+            using(var oc=new OrderContext())
+            {
+                oc.Orders.Add(orders[0]);
+                oc.SaveChanges();
+            }
 
-            List<Order> testOrder=OrderService.Import("..\\..\\s.xml");
+            //List<Order> testOrder=OrderService.Import("..\\..\\s.xml");
             
             
 

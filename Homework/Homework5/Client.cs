@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +11,7 @@ namespace Homework6
 
     public class Client
     {
-
+        [ForeignKey("Order")]
         private string Name;
         private string ID;
 
@@ -22,12 +24,15 @@ namespace Homework6
         public Client() { }
 
         public string name { get => Name; set => Name = value; }
+        [Key]
         public string id { get => ID; set => ID = value; }
-
+        
+   
+        public virtual Order Order { get; set; }
         public override bool Equals(object obj)
         {
             Client client = obj as Client;
-            return Name==client.Name&&ID==client.ID;
+            return client != null&& Name==client.Name&&ID==client.ID;
         }
 
         public override int GetHashCode()

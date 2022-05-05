@@ -12,7 +12,15 @@ namespace Homework6
     {
         private List<Order> orders;
 
-        public List<Order> Orders { get => orders; }
+        public List<Order> Orders {
+
+            get {
+                using (var oc = new OrderContext())
+                {
+                    return oc.Orders.ToList<Order>();
+                }
+            }
+        }
         
         public OrderService(List<Order> orders)
         {
@@ -21,17 +29,45 @@ namespace Homework6
 
         public void addOrder(Order order)
         {
-            orders.Add(order);
+            if (Orders.Contains(order)) throw new Exception("订单已经存在了!");
+            using (var oc = new OrderContext())
+            {
+                oc.Orders.Add(order);
+                oc.SaveChanges();
+            }
+        }
+
+        public Order GetOrder(string num)
+        {
+            using (var oc = new OrderContext())
+            {
+                var query = oc.Orders.Include("Orderdetails").Include("Client").SingleOrDefault(o => o.orderId == num);
+                if (query != null) return query;
+                else return null;
+            }
         }
 
         public void deleteOrder(Order order)
         {
-            orders.Remove(order);
+           
+            using (var oc = new OrderContext())
+            {
+                oc.Orders.Remove(order);
+                oc.SaveChanges();
+            }
+            
         }
 
         public void deleteOrderByNum(string num) {
-            orders.RemoveAll(o=>o.orderNum==num);
-            
+            Order order = GetOrder(num);
+            if (order != null)
+            {
+                using (var oc = new OrderContext())
+                {
+                    oc.Orders.Remove(order);
+                    oc.SaveChanges();
+                }
+            }
         }
 
         public void changeOrder(Order oldOrder,Order newOrder)
@@ -39,10 +75,8 @@ namespace Homework6
             
             try
             {
-                orders.Remove(oldOrder);
-                if (orders.Remove(oldOrder) == false) throw new Exception("Change failed : cannot find the order");
-                orders.Add(newOrder);
-                orders.Sort();
+                deleteOrder(oldOrder);
+                addOrder(newOrder);
             }
             catch (Exception e)
             {
@@ -54,7 +88,7 @@ namespace Homework6
 
         public void sortOrderByAmount()
         {
-            orders.Sort((order1, order2) => { 
+            Orders.Sort((order1, order2) => { 
                 if (order1.getAmount() > order2.getAmount()) return 1; 
                 else return 0; }
             );
@@ -63,42 +97,30 @@ namespace Homework6
 
         public void sortOrderByNumber()
         {
-            orders.Sort();
+            Orders.Sort();
         }
 
         public List<Order> queryByOrderNum(string orderNum)
         {
-            try {
-                var query = from order in orders where order.orderNum == orderNum select new Order(order);
-
-                if (query.Last() == null) throw new Exception("Select Failed");
-                return query.ToList<Order>(); ;
-            }
-            catch(Exception e)
+            using (var oc = new OrderContext())
             {
-                Console.WriteLine(e.Message);
-                return new List<Order>();
+                var query = oc.Orders.Include("Orderdetails").Include("Client").Where(o=>o.orderId==orderNum);
+                if (query != null) return query as List<Order>;
+                else return null;
             }
 
-            
+
         }
 
         public List<Order> queryByClientName(string Name)
         {
-            try
+            using (var oc = new OrderContext())
             {
-                var query = from order in orders where order.clientDetail.name == Name select new Order(order);
-                
-                
-                if (query.Last()==null) throw new Exception("Select Failed");
-                return query.ToList<Order>();;
+                var query = oc.Orders.Include("Orderdetails").Include("Client").Where(o => o.ClientDetail.name == Name);
+                if (query != null) return query as List<Order>;
+                else return null;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return new List<Order>();
-            }
-            
+
         }
 
         public void Export()

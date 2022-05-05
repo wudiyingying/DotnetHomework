@@ -49,7 +49,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 131F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 143F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 144F));
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox3, 0, 1);
@@ -70,13 +70,13 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(126, 21);
+            this.textBox1.Size = new System.Drawing.Size(125, 21);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "订单号";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(135, 3);
+            this.textBox2.Location = new System.Drawing.Point(134, 3);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(125, 21);
             this.textBox2.TabIndex = 1;
@@ -86,13 +86,13 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(3, 99);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(126, 21);
+            this.textBox3.Size = new System.Drawing.Size(125, 21);
             this.textBox3.TabIndex = 2;
             this.textBox3.Text = "顾客姓名";
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(266, 3);
+            this.textBox4.Location = new System.Drawing.Point(265, 3);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(124, 21);
             this.textBox4.TabIndex = 3;
@@ -100,7 +100,7 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(396, 3);
+            this.textBox5.Location = new System.Drawing.Point(395, 3);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(125, 21);
             this.textBox5.TabIndex = 4;
@@ -109,7 +109,7 @@
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(266, 99);
+            this.textBox6.Location = new System.Drawing.Point(265, 99);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(124, 21);
             this.textBox6.TabIndex = 5;
@@ -117,7 +117,7 @@
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(527, 3);
+            this.textBox7.Location = new System.Drawing.Point(526, 3);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(112, 21);
             this.textBox7.TabIndex = 6;
@@ -125,7 +125,7 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(645, 3);
+            this.textBox9.Location = new System.Drawing.Point(644, 3);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(138, 21);
             this.textBox9.TabIndex = 8;
@@ -144,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(803, 451);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form2";

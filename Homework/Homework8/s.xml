@@ -1,93 +1,103 @@
 <?xml version="1.0"?>
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Order>
-    <orderNum>000001</orderNum>
-    <clientDetail>
+    <orderId>XX0001</orderId>
+    <ClientDetail>
       <name>XXA</name>
       <id>A123456</id>
-    </clientDetail>
+    </ClientDetail>
     <OrderDetails>
       <OrderDetails>
-        <goodsDetail>
+        <Id>000001</Id>
+        <Goods>
           <price>1000</price>
-          <serialNum>EA001</serialNum>
+          <GoodsId>EA001</GoodsId>
           <name>EarPhone</name>
-        </goodsDetail>
+        </Goods>
         <Discount>0.9</Discount>
         <Count>2</Count>
       </OrderDetails>
       <OrderDetails>
-        <goodsDetail>
+        <Id>000002</Id>
+        <Goods>
           <price>500</price>
-          <serialNum>EA119</serialNum>
+          <GoodsId>EA119</GoodsId>
           <name>Keybord</name>
-        </goodsDetail>
+        </Goods>
         <Discount>0.95</Discount>
         <Count>3</Count>
       </OrderDetails>
       <OrderDetails>
-        <goodsDetail>
+        <Id>000003</Id>
+        <Goods>
           <price>2000</price>
-          <serialNum>EA002</serialNum>
+          <GoodsId>EA002</GoodsId>
           <name>Displayer</name>
-        </goodsDetail>
+        </Goods>
         <Discount>0.8</Discount>
         <Count>1</Count>
       </OrderDetails>
       <OrderDetails>
-        <goodsDetail>
+        <Id>000004</Id>
+        <Goods>
           <price>6000</price>
-          <serialNum>EA221</serialNum>
+          <GoodsId>EA221</GoodsId>
           <name>TabletPC</name>
-        </goodsDetail>
+        </Goods>
         <Discount>0.88</Discount>
         <Count>1</Count>
       </OrderDetails>
     </OrderDetails>
+    <TotalPrice>10105</TotalPrice>
   </Order>
   <Order>
-    <orderNum>000002</orderNum>
-    <clientDetail>
+    <orderId>XX0002</orderId>
+    <ClientDetail>
       <name>XXB</name>
       <id>A123457</id>
-    </clientDetail>
+    </ClientDetail>
     <OrderDetails>
       <OrderDetails>
-        <goodsDetail>
+        <Id>000001</Id>
+        <Goods>
           <price>8000</price>
-          <serialNum>EA010</serialNum>
+          <GoodsId>EA010</GoodsId>
           <name>Laptop</name>
-        </goodsDetail>
+        </Goods>
         <Discount>0.8</Discount>
         <Count>2</Count>
       </OrderDetails>
       <OrderDetails>
-        <goodsDetail>
+        <Id>000002</Id>
+        <Goods>
           <price>5000</price>
-          <serialNum>EA005</serialNum>
+          <GoodsId>EA005</GoodsId>
           <name>Phone</name>
-        </goodsDetail>
+        </Goods>
         <Discount>0.95</Discount>
         <Count>3</Count>
       </OrderDetails>
       <OrderDetails>
-        <goodsDetail>
+        <Id>000003</Id>
+        <Goods>
           <price>6000</price>
-          <serialNum>EA221</serialNum>
+          <GoodsId>EA221</GoodsId>
           <name>TabletPC</name>
-        </goodsDetail>
+        </Goods>
         <Discount>0.8</Discount>
         <Count>1</Count>
       </OrderDetails>
       <OrderDetails>
-        <goodsDetail>
+        <Id>000004</Id>
+        <Goods>
           <price>500</price>
-          <serialNum>EA119</serialNum>
+          <GoodsId>EA119</GoodsId>
           <name>Keybord</name>
-        </goodsDetail>
+        </Goods>
         <Discount>0.88</Discount>
         <Count>1</Count>
       </OrderDetails>
     </OrderDetails>
+    <TotalPrice>32290</TotalPrice>
   </Order>
 </ArrayOfOrder>
