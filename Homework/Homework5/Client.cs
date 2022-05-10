@@ -11,9 +11,9 @@ namespace Homework6
 
     public class Client
     {
-        [ForeignKey("Order")]
-        private string Name;
-        private string ID;
+      
+        public string Name { get; set; }
+        public string ID { get; set; }
 
         public Client(string name,string id)
         {
@@ -23,12 +23,8 @@ namespace Homework6
 
         public Client() { }
 
-        public string name { get => Name; set => Name = value; }
-        [Key]
-        public string id { get => ID; set => ID = value; }
-        
-   
-        public virtual Order Order { get; set; }
+    
+       
         public override bool Equals(object obj)
         {
             Client client = obj as Client;

@@ -10,80 +10,92 @@ namespace Homework6
     
     public class Order:IComparable
     {
-        private string OrderID;
-        private Client client = new Client();
-        private List<OrderDetails> orderDetails;
-        private double totalPrice;
-        [Key]
-        public string orderId{ get => OrderID; set =>OrderID=value; }
-
-        public virtual Client ClientDetail { get => client; set => client = value; }
         
-        public List<OrderDetails> OrderDetails { get => orderDetails; set => orderDetails = value; }
+       
+        public string OrderId{ get; set; }
+
+        public string ClientId { get; set; }
+        public Client Client { get; set; }
+        
+        public List<OrderDetails> OrderDetails { get; set; }
 
         
+        public string ClientName { get => Client != null ? Client.Name : ""; }
+
         //public string ClientName { get => client.name; }
 
-        public double TotalPrice { get => totalPrice; set => totalPrice = value; }
-        public Order(String orderNum,Client c,List<OrderDetails> d)
+        public double TotalPrice
         {
-            orderId = orderNum;
-            client = c;
-            orderDetails = d;
-            totalPrice = getAmount();
+            get => OrderDetails.Sum(item => item.TotalPrice);
         }
-
-        public Order() { 
+        public Order(String orderNum,Client c)
+        {
+            OrderId = orderNum;
+            ClientId = c.ID;
+            Client = c;
+            OrderDetails = new List<OrderDetails>();
             
         }
 
-        public Order(Order order)
+        public Order(string orderNum,Client c,List<OrderDetails> ods)
         {
-            this.OrderID = order.OrderID;
-            this.client = order.client;
-            this.orderDetails = order.orderDetails;
-            this.totalPrice = order.totalPrice;
+            OrderId = orderNum;
+            ClientId = c.ID;
+            Client = c;
+            OrderDetails = ods;
+            
         }
 
-
-        public double getAmount()
+        public void AddDetails(List<OrderDetails> ods)
         {
-            double n = 0;
-            foreach(OrderDetails orderdetail in orderDetails)
+            ods.ForEach(o =>
             {
-                n += orderdetail.getAmount();
-            }
+                if (!OrderDetails.Contains(o)) OrderDetails.Add(o); ;
 
-            return n;
+            });
+           
+        }
+
+        public void AddDetail(OrderDetails ods)
+        {
+            if (OrderDetails.Contains(ods)) return;
+            OrderDetails.Add(ods);
+        }
+        
+        public void RemoveDetails(OrderDetails ods)
+        {
+            OrderDetails.Remove(ods);
+
         }
         public override bool Equals(object obj)
         {
             Order order = obj as Order;
-            return order!=null&&client.Equals(order.client)&&orderDetails.Equals(order.orderDetails);
+            return order!=null&&Client.Equals(order.Client)&&OrderDetails.Equals(order.OrderDetails);
         }
 
-        /*
         public override int GetHashCode()
         {
-
-            //return client.GetHashCode() * 10 + orderDetails.GetHashCode() * 20;
-        }*/
-
+            var hashCode = -531220479;
+            hashCode = hashCode * -1521134295 + OrderId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ClientName);
+           
+            return hashCode;
+        }
 
         public int CompareTo(object obj)
         {
             Order order = obj as Order;
-            return this.OrderID.CompareTo(order.OrderID);
+            return this.OrderId.CompareTo(order.OrderId);
         }
 
         public override string ToString()
         {
             string s = "";
-            foreach(OrderDetails orderDetail in orderDetails)
+            foreach(OrderDetails orderDetail in OrderDetails)
             {
                 s += orderDetail.ToString()+"\n";
             }
-            return " Order number : "+orderId+"\n Client infoamtion : "+client.ToString()+"\nAmount : "+getAmount()+"\n Order details : \n"+s;
+            return " Order number : "+OrderId+"\n Client infoamtion : "+Client.ToString()+"\nAmount : "+TotalPrice+"\n Order details : \n"+s;
         }
     }
 }

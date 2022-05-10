@@ -11,39 +11,58 @@ namespace Homework6
   
     public class OrderDetails
     {
-        private Goods goods;
-        private double discount;
-        private int count;
-        private string id;
-        [Key]
-        public string Id { get => id; set => id = value; }
-        public Goods Goods { get => goods; set => goods = value; }
-        public double Discount { get => discount; set => discount = value; }
-        public int Count { get => count; set => count = value; }
-        public string OrderId { get; set; }
-        [ForeignKey("OrderId")]
-        public Order order { get; set; }
+        public string Id { get; set; }
 
+        public int Index { get; set; } //序号
 
-        public OrderDetails(string i,Goods g,double d,int c)
+        public string GoodsId { get; set; }
+
+        public Goods GoodsItem { get; set; }
+
+        public String GoodsName { get => GoodsItem != null ? this.GoodsItem.Name : ""; }
+
+        public double UnitPrice { get => GoodsItem != null ? this.GoodsItem.Price : 0.0; }
+
+        public string OrderId;
+
+        public int Quantity { get; set; }
+
+        public OrderDetails()
         {
-            goods = g;
-            discount = d;
-            count = c;
-            id = i;
+            Id = Guid.NewGuid().ToString();
         }
 
-        public OrderDetails() { }
-        
-      
+        public OrderDetails(int index, Goods goods, int quantity):this()
+        {
+            this.Index = index;
+            this.GoodsItem = goods;
+            this.Quantity = quantity;
+        }
+
+        public double TotalPrice
+        {
+            get => GoodsItem == null ? 0.0 : GoodsItem.Price * Quantity;
+        }
+
         public override string ToString()
         {
-            return goods.ToString()+" Discount : "+discount +" Count : "+count;
+            return $"[No.:{Index},goods:{GoodsName},quantity:{Quantity},totalPrice:{TotalPrice}]";
         }
 
-        public double getAmount()
+        public override bool Equals(object obj)
         {
-            return goods.price*discount*count;
+            var item = obj as OrderDetails;
+            return item != null &&
+                   GoodsName == item.GoodsName;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -2127770830;
+            hashCode = hashCode * -1521134295 + Index.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(GoodsName);
+            hashCode = hashCode * -1521134295 + Quantity.GetHashCode();
+            return hashCode;
         }
     }
 }

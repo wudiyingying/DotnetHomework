@@ -5,35 +5,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Data.Entity;
 
 namespace Homework6
 {
     public class OrderService
     {
-        private List<Order> orders;
+        //private List<Order> orders;
 
         public List<Order> Orders {
 
             get {
                 using (var oc = new OrderContext())
                 {
-                    return oc.Orders.ToList<Order>();
+                    return oc.Orders
+                        .Include(o => o.OrderDetails.Select(d => d.GoodsItem))
+                        .Include("Client")
+                        .ToList<Order>();
                 }
             }
         }
         
-        public OrderService(List<Order> orders)
-        {
-            this.orders = orders;
-        }
+        
 
         public void addOrder(Order order)
         {
-            if (Orders.Contains(order)) throw new Exception("订单已经存在了!");
+            FixOrder(order);
             using (var oc = new OrderContext())
             {
                 oc.Orders.Add(order);
-                oc.SaveChanges();
+                try {oc.SaveChanges(); }
+                catch(Exception ex) 
+                { throw; }
+                
             }
         }
 
@@ -41,15 +45,27 @@ namespace Homework6
         {
             using (var oc = new OrderContext())
             {
-                var query = oc.Orders.Include("Orderdetails").Include("Client").SingleOrDefault(o => o.orderId == num);
-                if (query != null) return query;
-                else return null;
+                return oc.Orders
+                    .Include(o => o.OrderDetails.Select(d => d.GoodsItem))
+                    .Include("Client")
+                    .SingleOrDefault(o => o.OrderId == num);
             }
         }
 
-        public void deleteOrder(Order order)
+        private static void FixOrder(Order newOrder)
         {
-           
+            newOrder.ClientId = newOrder.Client.ID;
+            newOrder.Client = null;
+            newOrder.OrderDetails.ForEach(d => {
+                d.GoodsId = d.GoodsItem.GoodsId;
+                d.GoodsItem = null;
+            });
+        }
+
+        public void deleteOrder(string num)
+        {
+            var order = GetOrder(num);
+            if (order == null) return;
             using (var oc = new OrderContext())
             {
                 oc.Orders.Remove(order);
@@ -58,24 +74,14 @@ namespace Homework6
             
         }
 
-        public void deleteOrderByNum(string num) {
-            Order order = GetOrder(num);
-            if (order != null)
-            {
-                using (var oc = new OrderContext())
-                {
-                    oc.Orders.Remove(order);
-                    oc.SaveChanges();
-                }
-            }
-        }
+   
 
-        public void changeOrder(Order oldOrder,Order newOrder)
+        public void changeOrder(Order newOrder)
         {
             
             try
             {
-                deleteOrder(oldOrder);
+                deleteOrder(newOrder.OrderId);
                 addOrder(newOrder);
             }
             catch (Exception e)
@@ -89,7 +95,7 @@ namespace Homework6
         public void sortOrderByAmount()
         {
             Orders.Sort((order1, order2) => { 
-                if (order1.getAmount() > order2.getAmount()) return 1; 
+                if (order1.TotalPrice > order2.TotalPrice) return 1; 
                 else return 0; }
             );
             
@@ -100,51 +106,47 @@ namespace Homework6
             Orders.Sort();
         }
 
-        public List<Order> queryByOrderNum(string orderNum)
-        {
-            using (var oc = new OrderContext())
-            {
-                var query = oc.Orders.Include("Orderdetails").Include("Client").Where(o=>o.orderId==orderNum);
-                if (query != null) return query as List<Order>;
-                else return null;
-            }
-
-
-        }
-
+    
         public List<Order> queryByClientName(string Name)
         {
             using (var oc = new OrderContext())
             {
-                var query = oc.Orders.Include("Orderdetails").Include("Client").Where(o => o.ClientDetail.name == Name);
-                if (query != null) return query as List<Order>;
-                else return null;
+                return oc.Orders
+                    .Include(o => o.OrderDetails.Select(d => d.GoodsItem))
+                    .Include("Client")
+                    .Where(o => o.Client.Name == Name)
+                    .ToList<Order>();
             }
 
         }
 
-        public void Export()
+        public void Export(String fileName)
         {
-            
-            XmlSerializer xml = new XmlSerializer(typeof(Order[]));
-            using (FileStream fs = new FileStream(@"..\..\s.xml", FileMode.Create))
+            XmlSerializer xs = new XmlSerializer(typeof(List<Order>));
+            using (FileStream fs = new FileStream(fileName, FileMode.Create))
             {
-                xml.Serialize(fs, orders.ToArray());
-              
+                xs.Serialize(fs, Orders);
             }
-
         }
 
-        public static List<Order> Import(string path)
+        public void Import(string path)
         {
-            XmlSerializer xml = new XmlSerializer(typeof(List<Order>));
-            List<Order> orders=new List<Order>();
+            XmlSerializer xs = new XmlSerializer(typeof(List<Order>));
             using (FileStream fs = new FileStream(path, FileMode.Open))
             {
-                fs.Seek(0, SeekOrigin.Begin);
-                orders.AddRange((List<Order>)xml.Deserialize(fs));
+                using (var oc = new OrderContext())
+                {
+                    List<Order> temp = (List<Order>)xs.Deserialize(fs);
+                    temp.ForEach(order => {
+                        if (oc.Orders.SingleOrDefault(o => o.OrderId == order.OrderId) == null)
+                        {
+                            FixOrder(order);
+                            oc.Orders.Add(order);
+                        }
+                    });
+                    oc.SaveChanges();
+                }
             }
-            return orders;
         }
 
     }

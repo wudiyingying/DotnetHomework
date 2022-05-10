@@ -19,6 +19,8 @@ namespace Homework6
         }
 
         public DbSet<Order> Orders { get; set; }
-       
+        public DbSet<Goods> Goods { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<OrderDetails> OrderDetails { get; set; }
     }
 }
